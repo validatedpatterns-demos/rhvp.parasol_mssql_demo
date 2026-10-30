@@ -1,0 +1,10 @@
+$ErrorActionPreference = 'Stop'
+$saPassword = '{{ mssql_win_sa_password | replace("'", "''") }}'
+$conn = New-Object System.Data.SqlClient.SqlConnection
+$conn.ConnectionString = "Data Source=localhost;User ID=sa;Password=$saPassword;Initial Catalog=master;Encrypt=False"
+$conn.Open()
+$cmd = $conn.CreateCommand()
+$cmd.CommandText = "IF DB_ID('{{ mssql_win_database }}') IS NULL BEGIN CREATE DATABASE {{ mssql_win_database }}; SELECT 'created' AS result END ELSE BEGIN SELECT 'exists' AS result END"
+$result = $cmd.ExecuteScalar()
+$conn.Close()
+Write-Output $result

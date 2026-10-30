@@ -1,0 +1,94 @@
+---
+- name: Ensure Chocolatey is installed
+  chocolatey.chocolatey.win_chocolatey:
+    name: chocolatey
+    state: present
+
+- name: Install SQL Server 2022
+  chocolatey.chocolatey.win_chocolatey:
+    name: "{{ mssql_win_chocolatey_package }}"
+    version: "{{ mssql_win_chocolatey_package_version | default(omit, true) }}"
+    source: "{{ mssql_win_chocolatey_source }}"
+    state: present
+    params: >-
+      /CONFIGURATIONFILE:"ConfigurationFile.ini"
+      /SQLSYSADMINACCOUNTS:"{{ mssql_win_sysadmin_accounts }}"
+      /SECURITYMODE:"SQL"
+      /SAPWD:"{{ mssql_win_sa_password }}"
+    timeout: "{{ mssql_win_setup_timeout }}"
+  no_log: true
+  register: mssql_win_install
+
+- name: Reboot after SQL Server installation if the installer requested it
+  ansible.windows.win_reboot:
+  when: mssql_win_install.reboot_required | default(false)
+
+- name: Wait for the SQL Server service to exist
+  ansible.windows.win_service_info:
+    name: "{{ mssql_win_service_name }}"
+  register: mssql_win_service_info
+  until: mssql_win_service_info.services | length > 0
+  retries: 30
+  delay: 10
+
+- name: Enable TCP/IP for the instance
+  ansible.windows.win_regedit:
+    path: >-
+      HKLM:\SOFTWARE\Microsoft\Microsoft SQL Server\{{ mssql_win_registry_instance }}\MSSQLServer\SuperSocketNetLib\Tcp
+    name: Enabled
+    data: 1
+    type: dword
+    state: present
+  register: mssql_win_tcp_enabled_reg
+  when: mssql_win_tcp_enabled
+
+- name: Set the TCP port for the instance
+  ansible.windows.win_regedit:
+    path: >-
+      HKLM:\SOFTWARE\Microsoft\Microsoft SQL Server\{{ mssql_win_registry_instance }}\MSSQLServer\SuperSocketNetLib\Tcp\IPAll
+    name: TcpPort
+    data: "{{ mssql_win_tcp_port | string }}"
+    type: string
+    state: present
+  register: mssql_win_tcp_port_reg
+  when: mssql_win_tcp_enabled
+
+- name: Restart SQL Server so the TCP settings take effect
+  ansible.windows.win_service:
+    name: "{{ mssql_win_service_name }}"
+    state: restarted
+  when: (mssql_win_tcp_enabled_reg is defined and mssql_win_tcp_enabled_reg.changed)
+        or (mssql_win_tcp_port_reg is defined and mssql_win_tcp_port_reg.changed)
+
+- name: Open the firewall for SQL Server port
+  ansible.windows.win_shell: |
+    $ruleName = 'SQL Server (Parasol demo)'
+    if (-not (Get-NetFirewallRule -DisplayName $ruleName -ErrorAction SilentlyContinue)) {
+      New-NetFirewallRule -DisplayName $ruleName `
+        -Direction Inbound -Protocol TCP -LocalPort {{ mssql_win_tcp_port }} `
+        -Action Allow -Profile Any | Out-Null
+      Write-Output created
+    }
+  register: mssql_win_firewall
+  changed_when: (mssql_win_firewall.stdout | trim) == 'created'
+  when: mssql_win_tcp_enabled
+
+- name: Wait for TCP port to accept connections
+  ansible.windows.win_wait_for:
+    port: "{{ mssql_win_tcp_port }}"
+    delay: 5
+  when: mssql_win_tcp_enabled
+
+- name: Create the demo database
+  ansible.windows.win_shell: >-
+    {{ lookup('ansible.builtin.template',
+              'roles/mssql_win/templates/create-demo-database.ps1.j2') }}
+  register: mssql_win_db_create
+  changed_when: (mssql_win_db_create.stdout | trim) == 'created'
+  no_log: true
+
+- name: Report SQL Server readiness
+  ansible.builtin.debug:
+    msg: >-
+      SQL Server {{ mssql_win_instance }} is ready on {{ ansible_fqdn }}:{{ mssql_win_tcp_port }},
+      database {{ mssql_win_database }}

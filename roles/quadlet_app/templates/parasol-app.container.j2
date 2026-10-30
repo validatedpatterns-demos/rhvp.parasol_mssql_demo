@@ -1,0 +1,21 @@
+[Unit]
+Description=Parasol Insurance demo app (podman)
+Wants=network-online.target
+After=network-online.target
+
+[Container]
+Image={{ quadlet_app_image }}
+PublishPort={{ quadlet_app_http_port }}:8080
+Environment=MSSQL_HOST={{ quadlet_app_mssql_host }}
+Environment=MSSQL_USER={{ quadlet_app_mssql_user }}
+Environment=MSSQL_PASSWORD="{{ quadlet_app_mssql_password }}"
+Environment=MSSQL_DATABASE={{ quadlet_app_mssql_database }}
+AutoUpdate=registry
+PodmanArgs=--pull=newer
+
+[Service]
+Restart=always
+TimeoutStartSec=600
+
+[Install]
+WantedBy=multi-user.target

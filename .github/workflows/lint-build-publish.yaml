@@ -1,0 +1,56 @@
+name: lint-build-publish
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install lint tooling and collection deps
+        run: |
+          pip install ansible-core ansible-lint
+          ansible-galaxy collection install -r requirements.yml
+          # Make the collection resolvable to itself while linting
+          mkdir -p ~/.ansible/collections/ansible_collections/rhvp
+          ln -sfn "$GITHUB_WORKSPACE" \
+            ~/.ansible/collections/ansible_collections/rhvp/parasol_mssql_demo
+
+      - name: Lint
+        run: ansible-lint
+
+  publish:
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Build the collection
+        run: ansible-galaxy collection build --output-path dist/
+
+      - name: Publish to Galaxy
+        run: |
+          ansible-galaxy collection publish \
+            dist/rhvp-parasol_mssql_demo-*.tar.gz \
+            --api-key "${{ secrets.GALAXY_API_KEY }}"

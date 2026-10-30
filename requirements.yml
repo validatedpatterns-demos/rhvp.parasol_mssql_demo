@@ -1,0 +1,6 @@
+# Install collection dependencies into the Ansible search path.
+# Run me: ansible-galaxy collection install -r requirements.yml
+collections:
+  - name: ansible.windows
+  - name: chocolatey.chocolatey
+  - name: containers.podman

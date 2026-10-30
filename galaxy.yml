@@ -1,0 +1,28 @@
+namespace: rhvp
+name: parasol_mssql_demo
+version: 1.0.0
+readme: README.md
+authors:
+  - Parasol demo maintainers
+description: >-
+  Deploy the Parasol Insurance demo (Quarkus + podman quadlet) on RHEL VMs and
+  its SQL Server 2022 database on Windows Server VMs.
+license:
+  - Apache-2.0
+dependencies:
+  ansible.windows: ">=2.3.0"
+  chocolatey.chocolatey: ">=1.5.0"
+  containers.podman: ">=1.11.0"
+repository: https://github.com/blues-man/rhvp.parasol_mssql_demo
+homepage: https://github.com/blues-man/parasol-insurance-mssql
+issues: https://github.com/blues-man/rhvp.parasol_mssql_demo/issues
+build_ignore:
+  - dist
+  - .git
+tags:
+  - demo
+  - mssql
+  - podman
+  - quadlet
+  - windows
+  - rhel
