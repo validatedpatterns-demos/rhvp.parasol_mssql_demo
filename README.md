@@ -15,7 +15,7 @@ VM estate:
 
 The collection does **not** build the image; the app repo's GitHub Actions
 workflow (`build-push.yaml`) builds and pushes to
-`quay.io/validatedpatterns-demos/parasol-mssql`.
+`quay.io/validatedpatterns/parasol-mssql`.
 
 ## Setup
 
@@ -54,12 +54,14 @@ confirm the app is up.
 
 | Role | Variable | Default | Purpose |
 |------|----------|---------|---------|
-| `quadlet_app` | `quadlet_app_image` | `quay.io/validatedpatterns-demos/parasol-mssql:latest` | Container image to run |
+| `quadlet_app` | `quadlet_app_image` | `quay.io/validatedpatterns/parasol-mssql:latest` | Container image to run |
 | `quadlet_app` | `quadlet_app_service_name` | `parasol-app` | systemd unit name |
 | `quadlet_app` | `quadlet_app_http_port` | `8080` | Host port for the app |
 | `quadlet_app` | `quadlet_app_mssql_host` | `localhost` | **Must** be overridden |
-| `quadlet_app` | `quadlet_app_mssql_user`/`quadlet_app_mssql_password`/`parasol_mssql_win_database` | `sa` / `P@rasol-2026-Sql` / `parasol` | Datasource env vars |
+| `quadlet_app` | `quadlet_app_mssql_user`/`quadlet_app_mssql_password`/`quadlet_app_mssql_database` | `sa` / `P@rasol-2026-Sql` / `parasol` | Datasource env vars |
 | `quadlet_app` | `quadlet_app_registry_username`/`quadlet_app_registry_password` | empty | Podman login, only if the image repo is private |
+| `quadlet_app` | `quadlet_app_rhsm_register` | `false` | Register the RHEL host with subscription-manager first |
+| `quadlet_app` | `quadlet_app_rhsm_org_id`/`quadlet_app_rhsm_activation_key` | empty | Activation-key registration (or `quadlet_app_rhsm_username`/`_password` alternative) |
 | `mssql_win` | `mssql_win_chocolatey_package` | `sql-server-2022` | Chocolatey package |
 | `mssql_win` | `mssql_win_sa_password` | `P@rasol-2026-Sql` | `sa` password (Mixed mode is enabled by the role) |
 | `mssql_win` | `mssql_win_tcp_port` | `1433` | TCP/IP port opened on the firewall |

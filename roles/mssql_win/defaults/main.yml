@@ -10,7 +10,7 @@ mssql_win_chocolatey_source: https://community.chocolatey.org/api/v2/
 
 # SQL Server 2022 Setup parameters passed through to Setup.exe
 mssql_win_sa_password: P@rasol-2026-Sql
-mssql_win_sysadmin_accounts: "{{ ansible_user_domain }}\\{{ ansible_username }}"
+mssql_win_sysadmin_accounts: "BUILTIN\\Administrators"
 
 # Default instance for SQL Server 2022
 mssql_win_instance: MSSQLSERVER

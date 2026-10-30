@@ -1,6 +1,6 @@
 ---
 # Where the app image lives
-quadlet_app_image: quay.io/validatedpatterns-demos/parasol-mssql:latest
+quadlet_app_image: quay.io/validatedpatterns/parasol-mssql:latest
 
 # Name used for the generated systemd unit: <quadlet_app_service_name>.service
 quadlet_app_service_name: parasol-app
@@ -16,6 +16,18 @@ quadlet_app_mssql_host: localhost
 quadlet_app_mssql_user: sa
 quadlet_app_mssql_password: P@rasol-2026-Sql
 quadlet_app_mssql_database: parasol
+
+# Optional Red Hat subscription registration (runs before podman install).
+# Requires the `redhat.rhel_system_roles` collection (see requirements.yml).
+# Activation key mode:
+quadlet_app_rhsm_register: false
+quadlet_app_rhsm_org_id: ""
+quadlet_app_rhsm_activation_key: ""
+# Username/password mode (alternative to activation key):
+quadlet_app_rhsm_username: ""
+quadlet_app_rhsm_password: ""
+# Pin releases/repos, e.g. ["10.2"] or leave empty
+quadlet_app_rhsm_release: ""
 
 # Optional registry login; only needed if the image repository is private
 quadlet_app_registry_username: ""

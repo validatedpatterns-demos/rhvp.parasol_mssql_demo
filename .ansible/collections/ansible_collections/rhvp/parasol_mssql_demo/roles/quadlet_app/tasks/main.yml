@@ -8,6 +8,21 @@
       Set `quadlet_app_mssql_host` to the DNS name or IP of the Windows Server
       running SQL Server before deploying the app.
 
+- name: Register the system with Red Hat subscription-manager
+  ansible.builtin.include_role:
+    name: redhat.rhel_system_roles.rhsm
+    apply:
+      become: true
+      no_log: true
+  vars:
+    rhsm_state: present
+    rhsm_username: "{{ quadlet_app_rhsm_username | default(omit, true) }}"
+    rhsm_password: "{{ quadlet_app_rhsm_password | default(omit, true) }}"
+    rhsm_org_id: "{{ quadlet_app_rhsm_org_id | default(omit, true) }}"
+    rhsm_activation_key: "{{ quadlet_app_rhsm_activation_key | default(omit, true) }}"
+    rhsm_release: "{{ quadlet_app_rhsm_release | default(omit, true) }}"
+  when: quadlet_app_rhsm_register | bool
+
 - name: Ensure podman is installed
   ansible.builtin.dnf:
     name: podman

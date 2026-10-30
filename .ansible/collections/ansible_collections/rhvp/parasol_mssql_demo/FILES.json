@@ -40,6 +40,13 @@
    "chksum_type": null,
    "format": 1,
    "ftype": "dir",
+   "name": ".ansible/collections/ansible_collections/rhvp"
+  },
+  {
+   "chksum_sha256": null,
+   "chksum_type": null,
+   "format": 1,
+   "ftype": "dir",
    "name": ".ansible/modules"
   },
   {
@@ -71,7 +78,7 @@
    "name": ".github/workflows/lint-build-publish.yaml"
   },
   {
-   "chksum_sha256": "f330223dc8ccc52609ae4cb25a1f094b6a5b4008f5461abbe2f876d4ed2e9420",
+   "chksum_sha256": "661f92ddec19e63d5f5c7b484ba8a325706b6fe647e622ea9144cca9492aa121",
    "chksum_type": "sha256",
    "format": 1,
    "ftype": "file",
@@ -85,7 +92,7 @@
    "name": "LICENSE"
   },
   {
-   "chksum_sha256": "a4e58934e4d0640f02981bf38d6c0b7f2b20d6029ed0ca5dc952e2aff4bd7cb1",
+   "chksum_sha256": "638ddd9688ddc2725266bb556966e1616079fe1d9520caf793b63a96d0bba33e",
    "chksum_type": "sha256",
    "format": 1,
    "ftype": "file",
@@ -104,6 +111,13 @@
    "format": 1,
    "ftype": "file",
    "name": "changelogs/changelog.yaml"
+  },
+  {
+   "chksum_sha256": "61b5c576e84905ebee21459d08817c30642644f8ee04216423f3b8dd2e2aa7fa",
+   "chksum_type": "sha256",
+   "format": 1,
+   "ftype": "file",
+   "name": "host.local.yml"
   },
   {
    "chksum_sha256": "9531a2406b7a478dafceaf7a2cac049e99ba9b255d85e19bda2935f246f5a875",
@@ -134,14 +148,14 @@
    "name": "playbooks"
   },
   {
-   "chksum_sha256": "0edbb51c1d296ccb571e24485d7384e1805e07427f4500bda8b5c1427f997ba2",
+   "chksum_sha256": "0202f26914e4b9d7c31654b4d01c04fa936a372943ec0b157cfb9d7d7a1de252",
    "chksum_type": "sha256",
    "format": 1,
    "ftype": "file",
    "name": "playbooks/site.yml"
   },
   {
-   "chksum_sha256": "2bb5afb2ea1e2f6c8fee66f5b19228a20899ca7df4b09310852400aaf27a6eb5",
+   "chksum_sha256": "39c226603f6955d2dad5ee4a889d0b48c1796443f68cd461160315ff049f7517",
    "chksum_type": "sha256",
    "format": 1,
    "ftype": "file",
@@ -169,7 +183,7 @@
    "name": "roles/mssql_win/defaults"
   },
   {
-   "chksum_sha256": "1174733024359079376a68a280ed25fd426cf0058c37289e01b8a21e0e2894c0",
+   "chksum_sha256": "7accd6be45401de43079d9413382a569f588a8b5bdc2bd5a99ad99ac0c30b145",
    "chksum_type": "sha256",
    "format": 1,
    "ftype": "file",
@@ -218,7 +232,7 @@
    "name": "roles/quadlet_app/defaults"
   },
   {
-   "chksum_sha256": "e7a64a39e8bab5eafaa65de9996151c4edbf9bb306698d27f98fe29718a48292",
+   "chksum_sha256": "465bf66013b33686f0a80c570c029e1f09710767d4dd2d6775b3f9a4f5dfe2d7",
    "chksum_type": "sha256",
    "format": 1,
    "ftype": "file",
@@ -246,7 +260,7 @@
    "name": "roles/quadlet_app/tasks"
   },
   {
-   "chksum_sha256": "3596373577f8052caf2c53c6684b4afd9d05afa2cde494781141ed2e56b96826",
+   "chksum_sha256": "4212c4f6cf2e3c88afde957d1d0f096b8639f6a760798405842f48b30ab986ed",
    "chksum_type": "sha256",
    "format": 1,
    "ftype": "file",
