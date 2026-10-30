@@ -1,0 +1,41 @@
+{
+ "collection_info": {
+  "namespace": "rhvp",
+  "name": "parasol_mssql_demo",
+  "version": "1.0.0",
+  "authors": [
+   "Parasol demo maintainers"
+  ],
+  "readme": "README.md",
+  "tags": [
+   "demo",
+   "mssql",
+   "podman",
+   "quadlet",
+   "windows",
+   "rhel"
+  ],
+  "description": "Deploy the Parasol Insurance demo (Quarkus + podman quadlet) on RHEL VMs and its SQL Server 2022 database on Windows Server VMs.",
+  "license": [
+   "Apache-2.0"
+  ],
+  "license_file": null,
+  "dependencies": {
+   "ansible.windows": ">=2.3.0",
+   "chocolatey.chocolatey": ">=1.5.0",
+   "containers.podman": ">=1.11.0"
+  },
+  "repository": "https://github.com/validatedpatterns-demos/rhvp.parasol_mssql_demo",
+  "documentation": null,
+  "homepage": "https://github.com/validatedpatterns-demos/parasol-insurance-mssql",
+  "issues": "https://github.com/validatedpatterns-demos/rhvp.parasol_mssql_demo/issues"
+ },
+ "file_manifest_file": {
+  "name": "FILES.json",
+  "ftype": "file",
+  "chksum_type": "sha256",
+  "chksum_sha256": "7233e535316bc9ecae312544a236f0891133f45078cddd4ff5ab989492a55c24",
+  "format": 1
+ },
+ "format": 1
+}

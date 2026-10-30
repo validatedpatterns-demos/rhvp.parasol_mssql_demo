@@ -1,0 +1,25 @@
+# Example inventory. Replace hostnames/credentials (use ansible-vault in real
+# environments). The app hosts must point quadlet_app_mssql_host at the Windows
+# SQL Server host that the mssql_windows group deploys.
+#
+# All groups and MOST vars use sane Example Ansible defaults, except the ones
+# documented below, which you must tweak.
+all:
+  children:
+    mssql_windows:
+      hosts:
+        parasol-sql01:
+          ansible_host: "192.0.2.50"
+          ansible_user: administrator
+          ansible_password: "P@rasol-2026-Sql"
+          ansible_connection: winrm
+          ansible_winrm_transport: basic
+          ansible_winrm_server_cert_validation: ignore
+          mssql_win_sa_password: "P@rasol-2026-Sql"
+    parasol_rhel:
+      hosts:
+        parasol-app01:
+          ansible_host: "192.0.2.60"
+          ansible_user: cloud-user
+          ansible_become: true
+          quadlet_app_mssql_host: "parasol-sql01"

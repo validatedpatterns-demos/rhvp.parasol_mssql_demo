@@ -1,0 +1,22 @@
+---
+# Where the app image lives
+quadlet_app_image: quay.io/validatedpatterns-demos/parasol-mssql:latest
+
+# Name used for the generated systemd unit: <quadlet_app_service_name>.service
+quadlet_app_service_name: parasol-app
+
+# Quadlet units for a root-managed service live here
+quadlet_app_quadlet_dir: /etc/containers/systemd
+
+# App-side configuration
+quadlet_app_http_port: 8080
+
+# Database connection (SQL Server deployed by the mssql_win role)
+quadlet_app_mssql_host: localhost
+quadlet_app_mssql_user: sa
+quadlet_app_mssql_password: P@rasol-2026-Sql
+quadlet_app_mssql_database: parasol
+
+# Optional registry login; only needed if the image repository is private
+quadlet_app_registry_username: ""
+quadlet_app_registry_password: ""

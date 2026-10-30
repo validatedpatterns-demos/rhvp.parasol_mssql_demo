@@ -1,0 +1,5 @@
+requires_ansible: ">=2.15.0"
+action_groups:
+  all:
+    - quadlet_app
+    - mssql_win

@@ -13,9 +13,9 @@ dependencies:
   ansible.windows: ">=2.3.0"
   chocolatey.chocolatey: ">=1.5.0"
   containers.podman: ">=1.11.0"
-repository: https://github.com/blues-man/rhvp.parasol_mssql_demo
-homepage: https://github.com/blues-man/parasol-insurance-mssql
-issues: https://github.com/blues-man/rhvp.parasol_mssql_demo/issues
+repository: https://github.com/validatedpatterns-demos/rhvp.parasol_mssql_demo
+homepage: https://github.com/validatedpatterns-demos/parasol-insurance-mssql
+issues: https://github.com/validatedpatterns-demos/rhvp.parasol_mssql_demo/issues
 build_ignore:
   - dist
   - .git

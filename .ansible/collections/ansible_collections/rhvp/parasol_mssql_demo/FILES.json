@@ -1,0 +1,271 @@
+{
+ "files": [
+  {
+   "chksum_sha256": null,
+   "chksum_type": null,
+   "format": 1,
+   "ftype": "dir",
+   "name": "."
+  },
+  {
+   "chksum_sha256": null,
+   "chksum_type": null,
+   "format": 1,
+   "ftype": "dir",
+   "name": ".ansible"
+  },
+  {
+   "chksum_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "chksum_type": "sha256",
+   "format": 1,
+   "ftype": "file",
+   "name": ".ansible/.lock"
+  },
+  {
+   "chksum_sha256": null,
+   "chksum_type": null,
+   "format": 1,
+   "ftype": "dir",
+   "name": ".ansible/collections"
+  },
+  {
+   "chksum_sha256": null,
+   "chksum_type": null,
+   "format": 1,
+   "ftype": "dir",
+   "name": ".ansible/collections/ansible_collections"
+  },
+  {
+   "chksum_sha256": null,
+   "chksum_type": null,
+   "format": 1,
+   "ftype": "dir",
+   "name": ".ansible/modules"
+  },
+  {
+   "chksum_sha256": null,
+   "chksum_type": null,
+   "format": 1,
+   "ftype": "dir",
+   "name": ".ansible/roles"
+  },
+  {
+   "chksum_sha256": null,
+   "chksum_type": null,
+   "format": 1,
+   "ftype": "dir",
+   "name": ".github"
+  },
+  {
+   "chksum_sha256": null,
+   "chksum_type": null,
+   "format": 1,
+   "ftype": "dir",
+   "name": ".github/workflows"
+  },
+  {
+   "chksum_sha256": "287a433e4d74bbc1e8d196b00959b01bdf79fee53f04978a1ef3e97f0c7770f6",
+   "chksum_type": "sha256",
+   "format": 1,
+   "ftype": "file",
+   "name": ".github/workflows/lint-build-publish.yaml"
+  },
+  {
+   "chksum_sha256": "f330223dc8ccc52609ae4cb25a1f094b6a5b4008f5461abbe2f876d4ed2e9420",
+   "chksum_type": "sha256",
+   "format": 1,
+   "ftype": "file",
+   "name": ".gitignore"
+  },
+  {
+   "chksum_sha256": "7b9b12027ed63f0c87f389bc956e2fcdde3cf77982491ba33465f424fd8f6696",
+   "chksum_type": "sha256",
+   "format": 1,
+   "ftype": "file",
+   "name": "LICENSE"
+  },
+  {
+   "chksum_sha256": "a4e58934e4d0640f02981bf38d6c0b7f2b20d6029ed0ca5dc952e2aff4bd7cb1",
+   "chksum_type": "sha256",
+   "format": 1,
+   "ftype": "file",
+   "name": "README.md"
+  },
+  {
+   "chksum_sha256": null,
+   "chksum_type": null,
+   "format": 1,
+   "ftype": "dir",
+   "name": "changelogs"
+  },
+  {
+   "chksum_sha256": "3d7aad8f0af18c93a98a28eac07ccbd271009b4e828eb5511f989c3b471693ba",
+   "chksum_type": "sha256",
+   "format": 1,
+   "ftype": "file",
+   "name": "changelogs/changelog.yaml"
+  },
+  {
+   "chksum_sha256": "9531a2406b7a478dafceaf7a2cac049e99ba9b255d85e19bda2935f246f5a875",
+   "chksum_type": "sha256",
+   "format": 1,
+   "ftype": "file",
+   "name": "host.yml"
+  },
+  {
+   "chksum_sha256": null,
+   "chksum_type": null,
+   "format": 1,
+   "ftype": "dir",
+   "name": "meta"
+  },
+  {
+   "chksum_sha256": "0168e938c0fae0d8899a8f7c726b772a43db2af93f6dd43073bef92a40e978f3",
+   "chksum_type": "sha256",
+   "format": 1,
+   "ftype": "file",
+   "name": "meta/runtime.yml"
+  },
+  {
+   "chksum_sha256": null,
+   "chksum_type": null,
+   "format": 1,
+   "ftype": "dir",
+   "name": "playbooks"
+  },
+  {
+   "chksum_sha256": "0edbb51c1d296ccb571e24485d7384e1805e07427f4500bda8b5c1427f997ba2",
+   "chksum_type": "sha256",
+   "format": 1,
+   "ftype": "file",
+   "name": "playbooks/site.yml"
+  },
+  {
+   "chksum_sha256": "2bb5afb2ea1e2f6c8fee66f5b19228a20899ca7df4b09310852400aaf27a6eb5",
+   "chksum_type": "sha256",
+   "format": 1,
+   "ftype": "file",
+   "name": "requirements.yml"
+  },
+  {
+   "chksum_sha256": null,
+   "chksum_type": null,
+   "format": 1,
+   "ftype": "dir",
+   "name": "roles"
+  },
+  {
+   "chksum_sha256": null,
+   "chksum_type": null,
+   "format": 1,
+   "ftype": "dir",
+   "name": "roles/mssql_win"
+  },
+  {
+   "chksum_sha256": null,
+   "chksum_type": null,
+   "format": 1,
+   "ftype": "dir",
+   "name": "roles/mssql_win/defaults"
+  },
+  {
+   "chksum_sha256": "1174733024359079376a68a280ed25fd426cf0058c37289e01b8a21e0e2894c0",
+   "chksum_type": "sha256",
+   "format": 1,
+   "ftype": "file",
+   "name": "roles/mssql_win/defaults/main.yml"
+  },
+  {
+   "chksum_sha256": null,
+   "chksum_type": null,
+   "format": 1,
+   "ftype": "dir",
+   "name": "roles/mssql_win/tasks"
+  },
+  {
+   "chksum_sha256": "a805f7a223be3f34276eadff8dfddc0c00b392b6e9288fd815d78a71f6a472d2",
+   "chksum_type": "sha256",
+   "format": 1,
+   "ftype": "file",
+   "name": "roles/mssql_win/tasks/main.yml"
+  },
+  {
+   "chksum_sha256": null,
+   "chksum_type": null,
+   "format": 1,
+   "ftype": "dir",
+   "name": "roles/mssql_win/templates"
+  },
+  {
+   "chksum_sha256": "2290b9c7730a1fab46618176cdfa97687e2955fbcd6ec2e831bd1980d96aba6a",
+   "chksum_type": "sha256",
+   "format": 1,
+   "ftype": "file",
+   "name": "roles/mssql_win/templates/create-demo-database.ps1.j2"
+  },
+  {
+   "chksum_sha256": null,
+   "chksum_type": null,
+   "format": 1,
+   "ftype": "dir",
+   "name": "roles/quadlet_app"
+  },
+  {
+   "chksum_sha256": null,
+   "chksum_type": null,
+   "format": 1,
+   "ftype": "dir",
+   "name": "roles/quadlet_app/defaults"
+  },
+  {
+   "chksum_sha256": "e7a64a39e8bab5eafaa65de9996151c4edbf9bb306698d27f98fe29718a48292",
+   "chksum_type": "sha256",
+   "format": 1,
+   "ftype": "file",
+   "name": "roles/quadlet_app/defaults/main.yml"
+  },
+  {
+   "chksum_sha256": null,
+   "chksum_type": null,
+   "format": 1,
+   "ftype": "dir",
+   "name": "roles/quadlet_app/handlers"
+  },
+  {
+   "chksum_sha256": "a225afd564c7a6f3f070ee677f96d28b5d3c3c8e302271a11f74c1f1c4b3b39f",
+   "chksum_type": "sha256",
+   "format": 1,
+   "ftype": "file",
+   "name": "roles/quadlet_app/handlers/main.yml"
+  },
+  {
+   "chksum_sha256": null,
+   "chksum_type": null,
+   "format": 1,
+   "ftype": "dir",
+   "name": "roles/quadlet_app/tasks"
+  },
+  {
+   "chksum_sha256": "3596373577f8052caf2c53c6684b4afd9d05afa2cde494781141ed2e56b96826",
+   "chksum_type": "sha256",
+   "format": 1,
+   "ftype": "file",
+   "name": "roles/quadlet_app/tasks/main.yml"
+  },
+  {
+   "chksum_sha256": null,
+   "chksum_type": null,
+   "format": 1,
+   "ftype": "dir",
+   "name": "roles/quadlet_app/templates"
+  },
+  {
+   "chksum_sha256": "8e2b3ff33f341edb6f41f0a64f10aac760ec919465ffcbb0b7b600ccf3f767fe",
+   "chksum_type": "sha256",
+   "format": 1,
+   "ftype": "file",
+   "name": "roles/quadlet_app/templates/parasol-app.container.j2"
+  }
+ ],
+ "format": 1
+}

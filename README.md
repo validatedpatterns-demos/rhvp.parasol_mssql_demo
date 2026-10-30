@@ -1,7 +1,7 @@
 # rhvp.parasol_mssql_demo
 
 Ansible collection that deploys the [Parasol Insurance
-demo](https://github.com/blues-man/parasol-insurance-mssql) across a two-tier
+demo](https://github.com/validatedpatterns-demos/parasol-insurance-mssql) across a two-tier
 VM estate:
 
 * **`mssql_win` role** — installs SQL Server 2022 (Developer edition) on
