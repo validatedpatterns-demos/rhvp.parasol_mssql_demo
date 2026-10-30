@@ -197,7 +197,7 @@
    "name": "roles/mssql_win/tasks"
   },
   {
-   "chksum_sha256": "a805f7a223be3f34276eadff8dfddc0c00b392b6e9288fd815d78a71f6a472d2",
+   "chksum_sha256": "acd47fbb20e20a10dde05961b62709f04d9d718ec898512c0d87e9d4d811c910",
    "chksum_type": "sha256",
    "format": 1,
    "ftype": "file",

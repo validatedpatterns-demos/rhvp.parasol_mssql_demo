@@ -10,11 +10,7 @@
     version: "{{ mssql_win_chocolatey_package_version | default(omit, true) }}"
     source: "{{ mssql_win_chocolatey_source }}"
     state: present
-    params: >-
-      /CONFIGURATIONFILE:"ConfigurationFile.ini"
-      /SQLSYSADMINACCOUNTS:"{{ mssql_win_sysadmin_accounts }}"
-      /SECURITYMODE:"SQL"
-      /SAPWD:"{{ mssql_win_sa_password }}"
+    params: /SQLSYSADMINACCOUNTS:"{{ mssql_win_sysadmin_accounts }}" /SECURITYMODE:"SQL" /SAPWD:"{{ mssql_win_sa_password }}"
     timeout: "{{ mssql_win_setup_timeout }}"
   no_log: true
   register: mssql_win_install
