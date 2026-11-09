@@ -43,7 +43,7 @@
    "name": "LICENSE"
   },
   {
-   "chksum_sha256": "732c1edacfb2dd4339a9011c1cde2e7f598296475ee8e15b23e6f22d6ff590ba",
+   "chksum_sha256": "b5647b717b3c4083695cc559f6bab1b9225548f8e8533d0f8985db0f9d46fa4a",
    "chksum_type": "sha256",
    "format": 1,
    "ftype": "file",
@@ -218,7 +218,7 @@
    "name": "roles/quadlet_app/defaults"
   },
   {
-   "chksum_sha256": "465bf66013b33686f0a80c570c029e1f09710767d4dd2d6775b3f9a4f5dfe2d7",
+   "chksum_sha256": "26e2429528982229572238a7589f74a7b4f6cd4b1e59e8eb01446d455c731f38",
    "chksum_type": "sha256",
    "format": 1,
    "ftype": "file",
@@ -260,7 +260,7 @@
    "name": "roles/quadlet_app/templates"
   },
   {
-   "chksum_sha256": "8e2b3ff33f341edb6f41f0a64f10aac760ec919465ffcbb0b7b600ccf3f767fe",
+   "chksum_sha256": "42e0ead9bf608ca083a5896773c1d9a4cb82373a6f1b4878a9196eff78b1476f",
    "chksum_type": "sha256",
    "format": 1,
    "ftype": "file",

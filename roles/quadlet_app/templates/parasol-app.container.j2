@@ -10,6 +10,12 @@ Environment=MSSQL_HOST={{ quadlet_app_mssql_host }}
 Environment=MSSQL_USER={{ quadlet_app_mssql_user }}
 Environment=MSSQL_PASSWORD="{{ quadlet_app_mssql_password }}"
 Environment=MSSQL_DATABASE={{ quadlet_app_mssql_database }}
+{% if quadlet_app_hibernate_database_generation | length > 0 %}
+Environment=QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION={{ quadlet_app_hibernate_database_generation }}
+{% endif %}
+{% if quadlet_app_hibernate_sql_load_script | length > 0 %}
+Environment=QUARKUS_HIBERNATE_ORM_SQL_LOAD_SCRIPT={{ quadlet_app_hibernate_sql_load_script }}
+{% endif %}
 AutoUpdate=registry
 PodmanArgs=--pull=newer
 

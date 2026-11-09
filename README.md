@@ -113,6 +113,8 @@ SQL on :1433 after `mssql_win` opens the firewall.
 | `quadlet_app` | `quadlet_app_http_port` | `8080` | Host port for the app |
 | `quadlet_app` | `quadlet_app_mssql_host` | `localhost` | **Must** be overridden |
 | `quadlet_app` | `quadlet_app_mssql_user`/`quadlet_app_mssql_password`/`quadlet_app_mssql_database` | `sa` / `P@rasol-2026-Sql` / `parasol` | Datasource env vars |
+| `quadlet_app` | `quadlet_app_hibernate_database_generation` | empty | Optional `QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION` (e.g. `none` to keep DB) |
+| `quadlet_app` | `quadlet_app_hibernate_sql_load_script` | empty | Optional `QUARKUS_HIBERNATE_ORM_SQL_LOAD_SCRIPT` (e.g. `no-file`) |
 | `quadlet_app` | `quadlet_app_registry_username`/`quadlet_app_registry_password` | empty | Podman login, only if the image repo is private |
 | `quadlet_app` | `quadlet_app_rhsm_register` | `false` | Register the RHEL host with subscription-manager first |
 | `quadlet_app` | `quadlet_app_rhsm_org_id`/`quadlet_app_rhsm_activation_key` | empty | Activation-key registration (or `quadlet_app_rhsm_username`/`_password` alternative) |

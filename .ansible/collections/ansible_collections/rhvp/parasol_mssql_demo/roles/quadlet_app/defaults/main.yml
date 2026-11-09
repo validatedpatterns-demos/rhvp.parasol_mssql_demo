@@ -17,6 +17,13 @@ quadlet_app_mssql_user: sa
 quadlet_app_mssql_password: P@rasol-2026-Sql
 quadlet_app_mssql_database: parasol
 
+# Optional Quarkus Hibernate overrides (unset = app image defaults:
+# drop-and-create + import.sql). Set to preserve data across restarts, e.g.
+#   quadlet_app_hibernate_database_generation: none
+#   quadlet_app_hibernate_sql_load_script: no-file
+quadlet_app_hibernate_database_generation: ""
+quadlet_app_hibernate_sql_load_script: ""
+
 # Optional Red Hat subscription registration (runs before podman install).
 # Requires the `redhat.rhel_system_roles` collection (see requirements.yml).
 # Activation key mode:
