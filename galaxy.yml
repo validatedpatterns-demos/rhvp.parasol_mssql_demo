@@ -20,6 +20,9 @@ issues: https://github.com/validatedpatterns-demos/rhvp.parasol_mssql_demo/issue
 build_ignore:
   - dist
   - .git
+  - .ansible
+  - .venv
+  - host.local.yml
 tags:
   - demo
   - mssql

@@ -1,0 +1,54 @@
+---
+# Example Ansible inventory shipped with this collection
+# (rhvp.parasol_mssql_demo/examples/). Targets VMs from
+# edge-gitops-vms-values.yaml in this same directory.
+#
+# Credentials are NOT stored here. Provide them via a vaulted vars file:
+#
+#   cp examples/vault.yml.example ~/vault-parasol.yml
+#   ansible-vault encrypt ~/vault-parasol.yml
+#   ansible-playbook -i examples/inventory-edge-gitops-vms.yml \
+#     -e @~/vault-parasol.yml --ask-vault-pass playbooks/site.yml
+#
+# In-cluster addressing (AAP execution environment / runner inside the
+# cluster) uses Service DNS. From outside the cluster, replace ansible_host
+# with a NodePort/LoadBalancer address or an oc port-forward endpoint.
+
+all:
+  children:
+    mssql_windows:
+      hosts:
+        # Chart name: {os}-{role}-{index}
+        windows2k22-mssql-001:
+          # Prefer short Service DNS when the controller shares the cluster DNS.
+          ansible_host: "windows2k22-mssql-001.edge-gitops-vms.svc"
+          ansible_user: Administrator
+          ansible_password: "{{ vault_win_admin_password }}"
+          ansible_connection: winrm
+          ansible_port: 5985
+          ansible_winrm_transport: basic
+          ansible_winrm_scheme: http
+          ansible_winrm_server_cert_validation: ignore
+          # Required by mssql_win (Scheduled Task logon + SQL sa).
+          mssql_win_sa_password: "{{ vault_mssql_sa_password }}"
+          # Second disk from edge-gitops-vms-values.yaml additionalDisks.sqldata
+          mssql_win_data_drive_letter: "D"
+
+    parasol_rhel:
+      hosts:
+        rhel9-parasol-001:
+          ansible_host: "rhel9-parasol-001.edge-gitops-vms.svc"
+          ansible_user: cloud-user
+          # Prefer SSH keys from the chart's authorizedsshkeys ExternalSecret.
+          # Password auth is optional; only set if your cloud-init enables it.
+          ansible_password: "{{ vault_rhel_password | default(omit) }}"
+          ansible_become: true
+          # Must resolve from the RHEL guest to the Windows SQL host.
+          # In-cluster guests can use the Windows Service DNS name:
+          quadlet_app_mssql_host: "windows2k22-mssql-001.edge-gitops-vms.svc"
+          quadlet_app_mssql_password: "{{ vault_mssql_sa_password }}"
+          # Set true (+ org/activation key or username/password) when the
+          # RHEL guest is unregistered and needs repos for podman.
+          # quadlet_app_rhsm_register: true
+          # quadlet_app_rhsm_org_id: "{{ vault_rhsm_org_id }}"
+          # quadlet_app_rhsm_activation_key: "{{ vault_rhsm_activation_key }}"

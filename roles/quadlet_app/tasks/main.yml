@@ -86,4 +86,4 @@
   ansible.builtin.debug:
     msg: >-
       Parasol app is up:
-      http://{{ ansible_default_ipv4.address }}:{{ quadlet_app_http_port }}/
+      http://{{ ansible_facts['default_ipv4']['address'] }}:{{ quadlet_app_http_port }}/

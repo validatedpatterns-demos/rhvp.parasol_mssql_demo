@@ -12,55 +12,6 @@
    "chksum_type": null,
    "format": 1,
    "ftype": "dir",
-   "name": ".ansible"
-  },
-  {
-   "chksum_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-   "chksum_type": "sha256",
-   "format": 1,
-   "ftype": "file",
-   "name": ".ansible/.lock"
-  },
-  {
-   "chksum_sha256": null,
-   "chksum_type": null,
-   "format": 1,
-   "ftype": "dir",
-   "name": ".ansible/collections"
-  },
-  {
-   "chksum_sha256": null,
-   "chksum_type": null,
-   "format": 1,
-   "ftype": "dir",
-   "name": ".ansible/collections/ansible_collections"
-  },
-  {
-   "chksum_sha256": null,
-   "chksum_type": null,
-   "format": 1,
-   "ftype": "dir",
-   "name": ".ansible/collections/ansible_collections/rhvp"
-  },
-  {
-   "chksum_sha256": null,
-   "chksum_type": null,
-   "format": 1,
-   "ftype": "dir",
-   "name": ".ansible/modules"
-  },
-  {
-   "chksum_sha256": null,
-   "chksum_type": null,
-   "format": 1,
-   "ftype": "dir",
-   "name": ".ansible/roles"
-  },
-  {
-   "chksum_sha256": null,
-   "chksum_type": null,
-   "format": 1,
-   "ftype": "dir",
    "name": ".github"
   },
   {
@@ -71,11 +22,11 @@
    "name": ".github/workflows"
   },
   {
-   "chksum_sha256": "287a433e4d74bbc1e8d196b00959b01bdf79fee53f04978a1ef3e97f0c7770f6",
+   "chksum_sha256": "383ac86c833e7eb1547c32cf1cf3f7b6fa7d3b896724c3c5af5f5d51538ba57d",
    "chksum_type": "sha256",
    "format": 1,
    "ftype": "file",
-   "name": ".github/workflows/lint-build-publish.yaml"
+   "name": ".github/workflows/lint.yaml"
   },
   {
    "chksum_sha256": "661f92ddec19e63d5f5c7b484ba8a325706b6fe647e622ea9144cca9492aa121",
@@ -92,7 +43,7 @@
    "name": "LICENSE"
   },
   {
-   "chksum_sha256": "638ddd9688ddc2725266bb556966e1616079fe1d9520caf793b63a96d0bba33e",
+   "chksum_sha256": "732c1edacfb2dd4339a9011c1cde2e7f598296475ee8e15b23e6f22d6ff590ba",
    "chksum_type": "sha256",
    "format": 1,
    "ftype": "file",
@@ -113,14 +64,35 @@
    "name": "changelogs/changelog.yaml"
   },
   {
-   "chksum_sha256": "61b5c576e84905ebee21459d08817c30642644f8ee04216423f3b8dd2e2aa7fa",
+   "chksum_sha256": null,
+   "chksum_type": null,
+   "format": 1,
+   "ftype": "dir",
+   "name": "examples"
+  },
+  {
+   "chksum_sha256": "e5914fab2b9e72491b6ceaa71e4132fda0492db7e8c431e445d94edc19404bef",
    "chksum_type": "sha256",
    "format": 1,
    "ftype": "file",
-   "name": "host.local.yml"
+   "name": "examples/edge-gitops-vms-values.yaml"
   },
   {
-   "chksum_sha256": "9531a2406b7a478dafceaf7a2cac049e99ba9b255d85e19bda2935f246f5a875",
+   "chksum_sha256": "5a51fd6efb332b465b2fafea7f58fa1c43307e27ad1dafe9d568d32f8aaa988b",
+   "chksum_type": "sha256",
+   "format": 1,
+   "ftype": "file",
+   "name": "examples/inventory-edge-gitops-vms.yml"
+  },
+  {
+   "chksum_sha256": "a1ee8b72b79f50d841f87270dd08f044de6f435e88e289c3f0b913c35b6c3684",
+   "chksum_type": "sha256",
+   "format": 1,
+   "ftype": "file",
+   "name": "examples/vault.yml.example"
+  },
+  {
+   "chksum_sha256": "533dca6ac0ee452f31cd30dc124c47cd0b118a6e34466e19f0959e6a70e69a2b",
    "chksum_type": "sha256",
    "format": 1,
    "ftype": "file",
@@ -183,7 +155,7 @@
    "name": "roles/mssql_win/defaults"
   },
   {
-   "chksum_sha256": "7accd6be45401de43079d9413382a569f588a8b5bdc2bd5a99ad99ac0c30b145",
+   "chksum_sha256": "4172d4abfd1903033a963b88fb892bf3a27b142ea3f56b78cb9b8c36ecbc04d2",
    "chksum_type": "sha256",
    "format": 1,
    "ftype": "file",
@@ -197,7 +169,7 @@
    "name": "roles/mssql_win/tasks"
   },
   {
-   "chksum_sha256": "acd47fbb20e20a10dde05961b62709f04d9d718ec898512c0d87e9d4d811c910",
+   "chksum_sha256": "008402edf1859c74e9e9dfa050a91543e0803316ba532ce40c98785a66c76d86",
    "chksum_type": "sha256",
    "format": 1,
    "ftype": "file",
@@ -211,11 +183,25 @@
    "name": "roles/mssql_win/templates"
   },
   {
-   "chksum_sha256": "2290b9c7730a1fab46618176cdfa97687e2955fbcd6ec2e831bd1980d96aba6a",
+   "chksum_sha256": "06059e2a99edcf26871eff6a2740ae04128829be48b522350f92cd3d8e26ba85",
    "chksum_type": "sha256",
    "format": 1,
    "ftype": "file",
    "name": "roles/mssql_win/templates/create-demo-database.ps1.j2"
+  },
+  {
+   "chksum_sha256": "63146c62f316e89a2f6e451d60af376043598c90fdda7916bf1f81ec7563de05",
+   "chksum_type": "sha256",
+   "format": 1,
+   "ftype": "file",
+   "name": "roles/mssql_win/templates/install-sql-server.ps1.j2"
+  },
+  {
+   "chksum_sha256": "6f67a5d55237e85d90c39db536c898e9a7288d0a00e3330436ca1850025001d6",
+   "chksum_type": "sha256",
+   "format": 1,
+   "ftype": "file",
+   "name": "roles/mssql_win/templates/prepare-data-disk.ps1.j2"
   },
   {
    "chksum_sha256": null,
@@ -260,7 +246,7 @@
    "name": "roles/quadlet_app/tasks"
   },
   {
-   "chksum_sha256": "4212c4f6cf2e3c88afde957d1d0f096b8639f6a760798405842f48b30ab986ed",
+   "chksum_sha256": "778b9846c1e8866a4ac0033e8e89d8ddab09db824ae693160e9bee94e39be900",
    "chksum_type": "sha256",
    "format": 1,
    "ftype": "file",

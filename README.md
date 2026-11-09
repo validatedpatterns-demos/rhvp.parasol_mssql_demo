@@ -35,20 +35,74 @@ ln -sfn "$(pwd)" ~/.ansible/collections/ansible_collections/rhvp/parasol_mssql_d
 
 ## Usage
 
-1. Copy `host.yml` (example inventory) and point `ansible_host` entries at
-   your VMs. Protect credentials with `ansible-vault` in a real environment.
-2. The `parasol_rhel` hosts need `quadlet_app_mssql_host` set to the Windows SQL
-   Server host DNS name/IP.
-3. Run the site playbook (requires WinRM already reachable on the Windows
+1. Copy `examples/vault.yml.example` to a path **outside** the repo (or a
+   gitignored vault file), fill in secrets, and encrypt with `ansible-vault`.
+2. Point inventory at your VMs:
+   - Local / static IPs: start from `host.yml`
+   - OpenShift Virtualization via
+     [edge-gitops-vms](https://github.com/mhjacks/edge-gitops-vms-chart): use
+     `examples/inventory-edge-gitops-vms.yml` (see
+     [Provisioning VMs with edge-gitops-vms](#provisioning-vms-with-edge-gitops-vms))
+3. The `parasol_rhel` hosts need `quadlet_app_mssql_host` set to the Windows SQL
+   Server host DNS name/IP (reachable from the RHEL guest).
+4. Run the site playbook (requires WinRM already reachable on the Windows
    host, and SSH + an ansible user with `become` on the RHEL host):
 
 ```bash
-ansible-playbook -i host.yml playbooks/site.yml
+ansible-playbook -i host.yml -e @~/vault-parasol.yml --ask-vault-pass \
+  playbooks/site.yml
 ```
 
 The playbook runs the Windows deployment first, then the RHEL quadlet
 deployment, and finally waits for `/q/health/ready` on the RHEL host to
 confirm the app is up.
+
+### Provisioning VMs with edge-gitops-vms
+
+This collection ships ready-to-adapt examples under `examples/`:
+
+| File | Purpose |
+|------|---------|
+| `examples/edge-gitops-vms-values.yaml` | Helm values for [edge-gitops-vms](https://github.com/mhjacks/edge-gitops-vms-chart) (Windows + RHEL VMs and Services) |
+| `examples/inventory-edge-gitops-vms.yml` | Ansible inventory targeting those Services |
+| `examples/vault.yml.example` | Credential variable names (fill + encrypt; never commit secrets) |
+
+The collection expects a **Windows Server** guest (WinRM :5985, TCP :1433 after
+SQL install) and a **RHEL** guest (SSH :22, HTTP :8080 for the app).
+
+| Guest | Chart key | Resulting VM / Service name | Ports published |
+|-------|-----------|-----------------------------|-----------------|
+| SQL Server | `vms.mssql` | `windows2k22-mssql-001` | 22, 5985, 1433 |
+| Parasol app | `vms.parasol` | `rhel9-parasol-001` | 22, 8080 |
+
+Windows golden image used in the example values:
+`quay.io/martjack/windows-server-2022-standard:latest` (VirtIO, OpenSSH, WinRM
+baked in). Important overrides vs chart defaults: `os` must contain `windows`,
+`efi: true`, `memory: 8Gi`, OS disk `storage: 60Gi` plus
+`additionalDisks.sqldata` (100Gi) for database files, Service ports for
+WinRM/MSSQL/HTTP, and `mainDiskStorageBus: virtio` for that golden image.
+The example inventory sets `mssql_win_data_drive_letter: D` so `mssql_win`
+initializes that disk and places SQL data/log/tempdb there.
+
+```bash
+# After installing the collection:
+ansible-galaxy collection install rhvp.parasol_mssql_demo
+COLLECTION="$(ansible-galaxy collection list rhvp.parasol_mssql_demo -p ~/.ansible/collections --format '{path}' 2>/dev/null | head -1)"
+# Or while developing this repo: COLLECTION="$(pwd)"
+
+helm upgrade --install parasol-vms edge-gitops-vms \
+  -n edge-gitops-vms --create-namespace \
+  -f "${COLLECTION}/examples/edge-gitops-vms-values.yaml"
+
+ansible-playbook \
+  -i "${COLLECTION}/examples/inventory-edge-gitops-vms.yml" \
+  -e @~/vault-parasol.yml --ask-vault-pass \
+  rhvp.parasol_mssql_demo.site
+```
+
+From the RHEL guest, `quadlet_app_mssql_host` should be the Windows Service DNS
+name (e.g. `windows2k22-mssql-001.edge-gitops-vms.svc`) so the app can reach
+SQL on :1433 after `mssql_win` opens the firewall.
 
 ### Role defaults / main variables
 
@@ -66,6 +120,8 @@ confirm the app is up.
 | `mssql_win` | `mssql_win_sa_password` | `P@rasol-2026-Sql` | `sa` password (Mixed mode is enabled by the role) |
 | `mssql_win` | `mssql_win_tcp_port` | `1433` | TCP/IP port opened on the firewall |
 | `mssql_win` | `mssql_win_database` | `parasol` | Database created for the app |
+| `mssql_win` | `mssql_win_data_drive_letter` | empty | When set (e.g. `D`), initialize that disk and put SQL data there |
+| `mssql_win` | `mssql_win_data_root` | `D:\MSSQL` if letter set | Root for data/log/tempdb/backup paths |
 
 ## Gotchas
 
@@ -76,6 +132,20 @@ confirm the app is up.
   afterwards. Do not "simplify" these steps away.
 * SQL Server install can take well over 30 minutes; the Chocolatey task uses
   a 7200s timeout and triggers a `win_reboot` when the installer asks for one.
+* Fresh golden images often have a **pending reboot** after Chocolatey pulls in
+  .NET / servicing packages. SQL Setup aborts with "A system reboot is
+  pending" in that case — the role reboots when `ansible_reboot_pending` is
+  set before invoking Setup.
+* SQL Setup under WinRM hits DPAPI `CryptographicException: Access is
+  denied` (exit `0x84b10001`) because the remoting session has no loaded
+  user profile. The role installs via a one-shot Scheduled Task logged on
+  as `Administrator` (requires `ansible_password` in inventory). Installing
+  over SSH also works around the same issue.
+* For a dedicated DB volume, attach a second disk (see
+  `examples/edge-gitops-vms-values.yaml` `additionalDisks.sqldata`) and set
+  `mssql_win_data_drive_letter` (example inventory uses `D`). The role formats
+  the first non-system RAW disk, passes `/INSTALLSQLDATADIR` into Setup, and
+  creates `parasol` on that volume.
 * The JDBC URL used by the app sets `encrypt=false;trustServerCertificate=true`
   because there is no CA-signed cert on the Windows host — same pattern as the
   OpenShift deployment in the app repo.

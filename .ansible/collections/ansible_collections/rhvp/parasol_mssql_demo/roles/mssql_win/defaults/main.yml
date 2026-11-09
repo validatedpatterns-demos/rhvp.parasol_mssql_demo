@@ -25,5 +25,34 @@ mssql_win_tcp_port: 1433
 # Database the app expects (Hibernate drop-and-create fills the schema)
 mssql_win_database: parasol
 
+# Optional second disk for SQL data/log/tempdb/backup files.
+# When mssql_win_data_drive_letter is set (e.g. "D"), the role:
+#   1) brings the first non-system RAW/unlettered disk online as that letter
+#   2) passes /INSTALLSQLDATADIR (and related paths) into SQL Setup
+#   3) creates the demo database files under mssql_win_data_root
+# Leave empty to keep Chocolatey's default paths on the OS volume.
+mssql_win_data_drive_letter: ""
+mssql_win_data_disk_label: SQLData
+mssql_win_data_root: "{{ (mssql_win_data_drive_letter | default('') | length > 0) | ternary(mssql_win_data_drive_letter ~ ':\\MSSQL', '') }}"
+
+# Base Setup.exe switches always passed through Chocolatey --package-parameters.
+# SAPWD is appended at runtime (see tasks) so the password stays out of defaults.
+mssql_win_setup_params_base: >-
+  /SQLSYSADMINACCOUNTS:"{{ mssql_win_sysadmin_accounts }}"
+  /SECURITYMODE:"SQL"
+
+mssql_win_setup_params_data: >-
+  {{
+    (mssql_win_data_root | length > 0) | ternary(
+      '/INSTALLSQLDATADIR:"' ~ mssql_win_data_root ~ '" '
+      ~ '/SQLUSERDBDIR:"' ~ mssql_win_data_root ~ '\Data" '
+      ~ '/SQLUSERDBLOGDIR:"' ~ mssql_win_data_root ~ '\Log" '
+      ~ '/SQLTEMPDBDIR:"' ~ mssql_win_data_root ~ '\TempDB" '
+      ~ '/SQLTEMPDBLOGDIR:"' ~ mssql_win_data_root ~ '\TempDB" '
+      ~ '/SQLBACKUPDIR:"' ~ mssql_win_data_root ~ '\Backup"',
+      ''
+    )
+  }}
+
 mssql_win_service_name: "{{ mssql_win_instance }}"
 mssql_win_setup_timeout: 7200
