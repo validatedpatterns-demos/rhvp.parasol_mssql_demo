@@ -3,5 +3,5 @@
 collections:
   - name: ansible.windows
   - name: chocolatey.chocolatey
+  - name: community.general
   - name: containers.podman
-  - name: redhat.rhel_system_roles

@@ -9,18 +9,16 @@
       running SQL Server before deploying the app.
 
 - name: Register the system with Red Hat subscription-manager
-  ansible.builtin.include_role:
-    name: redhat.rhel_system_roles.rhsm
-    apply:
-      become: true
-      no_log: true
-  vars:
-    rhsm_state: present
-    rhsm_username: "{{ quadlet_app_rhsm_username | default(omit, true) }}"
-    rhsm_password: "{{ quadlet_app_rhsm_password | default(omit, true) }}"
-    rhsm_org_id: "{{ quadlet_app_rhsm_org_id | default(omit, true) }}"
-    rhsm_activation_key: "{{ quadlet_app_rhsm_activation_key | default(omit, true) }}"
-    rhsm_release: "{{ quadlet_app_rhsm_release | default(omit, true) }}"
+  community.general.redhat_subscription:
+    state: present
+    username: "{{ quadlet_app_rhsm_username | default(omit, true) }}"
+    password: "{{ quadlet_app_rhsm_password | default(omit, true) }}"
+    org_id: "{{ quadlet_app_rhsm_org_id | default(omit, true) }}"
+    activationkey: "{{ quadlet_app_rhsm_activation_key | default(omit, true) }}"
+    release: "{{ quadlet_app_rhsm_release | default(omit, true) }}"
+    auto_attach: true
+  become: true
+  no_log: true
   when: quadlet_app_rhsm_register | bool
 
 - name: Ensure podman is installed

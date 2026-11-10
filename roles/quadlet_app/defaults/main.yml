@@ -25,7 +25,7 @@ quadlet_app_hibernate_database_generation: ""
 quadlet_app_hibernate_sql_load_script: ""
 
 # Optional Red Hat subscription registration (runs before podman install).
-# Requires the `redhat.rhel_system_roles` collection (see requirements.yml).
+# Uses community.general.redhat_subscription (see requirements.yml).
 # Activation key mode:
 quadlet_app_rhsm_register: false
 quadlet_app_rhsm_org_id: ""

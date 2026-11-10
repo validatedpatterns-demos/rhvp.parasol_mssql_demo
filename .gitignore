@@ -1,5 +1,6 @@
 target/
 dist/
 .venv/
+.ansible/
 *.tar.gz
 host.local.yml
