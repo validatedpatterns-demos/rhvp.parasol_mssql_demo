@@ -32,10 +32,11 @@ vmDefaults:
   # (e.g. quay.io/martjack/windows-server-*-standard). Use sata for generic
   # Windows images that do not.
   mainDiskStorageBus: virtio
-  # ClusterIP is enough when Ansible/AAP runs in-cluster and uses Service DNS.
-  # Switch to NodePort or LoadBalancer to reach VMs from outside the cluster.
-  serviceType: ClusterIP
-  publishService: false
+  # LoadBalancer + publishService expose each VM Service externally and ask
+  # validated-patterns external-dns to publish DNS for it
+  # (external-dns.validatedpatterns.io/publish=yes).
+  serviceType: LoadBalancer
+  publishService: true
 
 # Optional: only needed when the Windows containerdisk lives in a private registry.
 registryCredentialExternalSecrets:
